@@ -1,0 +1,7 @@
+#ifndef BACKLOGMANAGER_TEST_TFILEIOBASIC_H_
+#define BACKLOGMANAGER_TEST_TFILEIOBASIC_H_
+
+#include "../Source/File_IO.h"
+#include "../Test/catch.hpp"
+
+#endif // BACKLOGMANAGER_TEST_TFILEIOBASIC_H_

@@ -33,13 +33,31 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Source Files\App">
+      <UniqueIdentifier>{5bc5f653-bd3b-4e58-b2ee-9f073711691b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{3273a759-78d4-424a-ade5-380dbcc7f4fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\App">
+      <UniqueIdentifier>{694290df-449a-4684-ac3a-1124fdf99c71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GUI">
+      <UniqueIdentifier>{44c302ea-4414-4166-a125-e3c96e85162d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TEST">
+      <UniqueIdentifier>{b08a10fb-60f7-4b28-a37a-75f2e9401540}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TEST">
+      <UniqueIdentifier>{a55c8105-8ca2-4569-8ffd-aec0571736db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mainwindow.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GeneratedFiles\qrc_mainwindow.cpp">
+      <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -47,24 +65,105 @@
     <ClCompile Include="GeneratedFiles\Release\moc_mainwindow.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_mainwindow.cpp">
-      <Filter>Generated Files</Filter>
+    <ClCompile Include="Test\Database\t_db_basic.cpp">
+      <Filter>Source Files\TEST</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\Core\t_config_file.cpp">
+      <Filter>Source Files\TEST</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\Core\t_core_advanced.cpp">
+      <Filter>Source Files\TEST</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\Core\t_core_basic.cpp">
+      <Filter>Source Files\TEST</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\t_file_io_basic.cpp">
+      <Filter>Source Files\TEST</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\t_utility.cpp">
+      <Filter>Source Files\TEST</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\main.cpp">
+      <Filter>Source Files\TEST</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUI\mainwindow.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\stdafx.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\File_IO.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Database\Database.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Database\sqlite3.c">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\config_file.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\core.cpp">
+      <Filter>Source Files\App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="mainwindow.h">
-      <Filter>Header Files</Filter>
+    <CustomBuild Include="Source\GUI\mainwindow.qrc">
+      <Filter>Resource Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="mainwindow.ui">
+    <CustomBuild Include="Source\GUI\mainwindow.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="mainwindow.qrc">
-      <Filter>Resource Files</Filter>
+    <CustomBuild Include="Source\GUI\mainwindow.h">
+      <Filter>Header Files\GUI</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\catch.hpp">
+      <Filter>Header Files\TEST</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\t_file_io_basic.h">
+      <Filter>Header Files\TEST</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\t_utility.h">
+      <Filter>Header Files\TEST</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\Core\t_config_file.h">
+      <Filter>Header Files\TEST</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\Core\t_core.h">
+      <Filter>Header Files\TEST</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\Database\t_db_basic.h">
+      <Filter>Header Files\TEST</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\File_IO.h">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\stdafx.h">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\targetver.h">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\main.h">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Database\Database.h">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Database\sqlite3.h">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\config_file.h">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\core.h">
+      <Filter>Header Files\App</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
