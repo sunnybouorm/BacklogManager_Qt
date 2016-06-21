@@ -1,5 +1,8 @@
 #include "activity_model.h"
 
+#include <QFont>
+#include <QBrush>
+
 #include <iostream>//TODO delete me
 
 ActivityModel::ActivityModel(Core* core_, QObject *parent) : QAbstractListModel(parent){
@@ -42,7 +45,7 @@ ActivityModel::ActivityModel(Core* core_, QObject *parent) : QAbstractListModel(
 	row.clear();
 
 	//---------------------------------------------
-
+	this->string_list_ << "<Add new Activity>";
 
 	std::string sql = "SELECT Name FROM Activity;";
 	core_->database_.SqlCommand(sql);
@@ -60,26 +63,53 @@ int ActivityModel::rowCount(const QModelIndex &parent) const {
 	return string_list_.count();
 }
 
+/*
+ * Configures display properties of the List view attached to this model
+ */
 QVariant ActivityModel::data(const QModelIndex &index, int role) const {
-	if (!index.isValid()) {
-		return QVariant();
-	}
+	switch (role) {
 
-	if (index.row() >= string_list_.size()) {
-		return QVariant();
-	}
+	case Qt::DisplayRole:
+		if (!index.isValid()) {
+			return QVariant();
+		}
 
-	if (role == Qt::DisplayRole) {
+		if (index.row() >= string_list_.size()) {
+			return QVariant();
+		}
+
 		return string_list_.at(index.row());
-	}
+		break;
 
-	else {
-		return QVariant();
+	case Qt::TextAlignmentRole:
+		if (index.row() == 0) { return Qt::AlignCenter; }
+		break;
+
+	case Qt::FontRole:
+		if (index.row() == 0) {
+			QFont font;
+			font.setItalic(true);
+			return font;
+		}
+		break;
+
+	case Qt::ForegroundRole:
+		QBrush text;
+		if (index.row() == 0) {
+			text.setColor(Qt::gray);
+			return text;
+		}
+		break;
 	}
+	return QVariant();
 }
 
-//bool ActivityModel::setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) {
-//	bool result;
-//
-//	return result;
-//}
+bool ActivityModel::setData(const QModelIndex &index, const QVariant &value,
+	int role) 
+{
+	bool result;
+
+
+
+	return result;
+}

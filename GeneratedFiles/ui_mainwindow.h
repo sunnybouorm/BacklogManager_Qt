@@ -52,6 +52,9 @@ public:
         ActivityList = new QListView(groupBox_2);
         ActivityList->setObjectName(QStringLiteral("ActivityList"));
         ActivityList->setGeometry(QRect(10, 20, 211, 321));
+        ActivityList->setMouseTracking(false);
+        ActivityList->setSelectionMode(QAbstractItemView::SingleSelection);
+        ActivityList->setTextElideMode(Qt::ElideRight);
         ActivityList->setModelColumn(0);
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
