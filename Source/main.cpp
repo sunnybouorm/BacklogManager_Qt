@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	//Initialize GUI
 	QApplication a(argc, argv);
 
-	ActivityModel *activity_model = new ActivityModel(Q_NULLPTR);
+	ActivityModel *activity_model = new ActivityModel(&core, Q_NULLPTR);
 	MainWindow w(activity_model);
 	w.show();
 
