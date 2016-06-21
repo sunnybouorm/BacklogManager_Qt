@@ -107,7 +107,7 @@ bool Core::InitializeFromConfigFile() {//TODO
 }
 
 Core::Core() {
-	this->InitializeFromConfigFile();
+	if (this->database_.is_exist() == false) {this->InitializeFromConfigFile();}
 	this->database_.OpenConnection();
 }
 
