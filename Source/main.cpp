@@ -8,13 +8,18 @@
 int main(int argc, char *argv[])
 {
 	//Initialize database
-	Core core;
-	core.database_.OpenConnection();
+	//Core core;
+	//core.database_.OpenConnection();
 
+	//Initialize GUI
 	QApplication a(argc, argv);
-	MainWindow w;
+
+	ActivityModel *activity_model = new ActivityModel(Q_NULLPTR);
+	MainWindow w(activity_model);
 	w.show();
+
+	//core.database_.CloseConnection();
 	return a.exec();
 
-	core.database_.CloseConnection();
+	delete activity_model;
 }

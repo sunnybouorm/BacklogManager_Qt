@@ -2,18 +2,24 @@
 #define MAINWINDOW_H
 
 #include <QtWidgets/QMainWindow>
-#include "ui_mainwindow.h"
+#include "Source\GUI\Models\activity_model.h"
+
+namespace Ui 
+{
+	class MainWindowClass;
+}
 
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	MainWindow(QWidget *parent = 0);
+	MainWindow(ActivityModel *activity_model, QWidget *parent = Q_NULLPTR);
 	~MainWindow();
 
 private:
-	Ui::MainWindowClass ui;
+	//Ui::MainWindowClass ui; //TODO delete me
+	Ui::MainWindowClass *ui;
 };
 
 #endif // MAINWINDOW_H

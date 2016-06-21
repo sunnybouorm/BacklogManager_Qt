@@ -6,53 +6,55 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>911</width>
-    <height>682</height>
+    <width>1284</width>
+    <height>851</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="animated">
+   <bool>true</bool>
+  </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QListWidget" name="listWidget">
+   <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>171</width>
-      <height>261</height>
+      <x>30</x>
+      <y>50</y>
+      <width>421</width>
+      <height>551</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QListWidget" name="listWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>290</y>
-      <width>171</width>
-      <height>251</height>
-     </rect>
+    <property name="title">
+     <string/>
     </property>
-   </widget>
-   <widget class="QTableView" name="tableView">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>20</y>
-      <width>621</width>
-      <height>511</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QTextBrowser" name="textBrowser">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>540</y>
-      <width>181</width>
-      <height>21</height>
-     </rect>
-    </property>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>261</width>
+       <height>361</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Activity List</string>
+     </property>
+     <widget class="QListView" name="ActivityList">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>211</width>
+        <height>321</height>
+       </rect>
+      </property>
+      <property name="modelColumn">
+       <number>0</number>
+      </property>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -60,19 +62,10 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>911</width>
+     <width>1284</width>
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="title">
-     <string>database</string>
-    </property>
-    <addaction name="actionSet_directory"/>
-    <addaction name="actionExport_to_directory"/>
-    <addaction name="actionImport_from_sql"/>
-   </widget>
-   <addaction name="menuFile"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -83,21 +76,6 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionSet_directory">
-   <property name="text">
-    <string>set directory</string>
-   </property>
-  </action>
-  <action name="actionImport_from_sql">
-   <property name="text">
-    <string>import sql</string>
-   </property>
-  </action>
-  <action name="actionExport_to_directory">
-   <property name="text">
-    <string>Export db3</string>
-   </property>
-  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
