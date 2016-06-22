@@ -87,6 +87,18 @@ QVariant ActivityModel::headerData(int section, Qt::Orientation orientation, int
 
 }
 
+bool ActivityModel::insertRows(int position, int count, const QModelIndex &parent)
+{
+	beginInsertRows(QModelIndex(), position, position + count - 1);
+
+	for (int row = 0; row < count; ++row) {
+		this->string_list_.insert(position, "");
+	}
+
+	endInsertRows();
+	return true;
+}
+
 Qt::ItemFlags ActivityModel::flags(const QModelIndex &index) const 
 {
 	if (index.isValid() == false) {
@@ -96,16 +108,21 @@ Qt::ItemFlags ActivityModel::flags(const QModelIndex &index) const
 	return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 }
 
-bool ActivityModel::setData(const QModelIndex &index, const QVariant &value,
-	int role) 
+bool ActivityModel::setData(const QModelIndex &index, const QVariant &value, int role) 
+{
+	return setData(index, value, role, UPDATE);
+}
+
+bool ActivityModel::setData(const QModelIndex &index, const QVariant &value, int role,
+	Request sql_request) 
 {
 	if (index.isValid() && role == Qt::EditRole) {
-
 		if (index.row() == 0) {
-			this->string_list_.append(value.toString());
-			QModelIndex new_index = this->createIndex(string_list_.size(),index.column());
-			emit dataChanged(new_index, new_index);
-			return true;
+			int last_row = string_list_.size();
+			this->insertRows(last_row, 1);
+			QModelIndex last_index = QAbstractItemModel::createIndex(last_row, index.column());
+
+			return ( this->setData(last_index, value, role, INSERT) );
 		}
 		else {
 			bool request_successful = false;
@@ -114,6 +131,7 @@ bool ActivityModel::setData(const QModelIndex &index, const QVariant &value,
 			RowContainer row;
 
 			query.table_name = "Activity";
+			query.request = sql_request;
 
 			row["Name"] = string_list_.at(index.row()).toStdString();
 			query.search_params = row;
@@ -123,7 +141,6 @@ bool ActivityModel::setData(const QModelIndex &index, const QVariant &value,
 			query.columns = row;
 			row.clear();
 
-			query.request = UPDATE;
 			request_successful = core_->SqlRequest(query);
 
 			if (request_successful == true) {

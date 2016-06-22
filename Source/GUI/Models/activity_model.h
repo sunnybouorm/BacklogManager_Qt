@@ -16,8 +16,13 @@ public:
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 	QVariant headerData(int section, Qt::Orientation orientation, int role /*= Qt::DisplayRole*/) const Q_DECL_OVERRIDE;
 
+	bool insertRows(int position, int count, const QModelIndex &parent = QModelIndex());
+
 	Qt::ItemFlags flags(const QModelIndex &index) const;
-	bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
+
+	bool setData(const QModelIndex &index, const QVariant &value,int role = Qt::EditRole);
+	bool setData(const QModelIndex &index, const QVariant &value,int role = Qt::EditRole, 
+		Request sql_request = UPDATE);
 
 private:
 	Core *core_;
