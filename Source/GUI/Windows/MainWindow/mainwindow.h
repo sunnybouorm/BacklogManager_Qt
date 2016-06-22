@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QtWidgets/QMainWindow>
+
 #include "Source\GUI\Models\activity_model.h"
 
 namespace Ui 
@@ -18,7 +19,6 @@ public:
 	~MainWindow();
 
 private:
-	//Ui::MainWindowClass ui; //TODO delete me
 	Ui::MainWindowClass *ui;
 };
 

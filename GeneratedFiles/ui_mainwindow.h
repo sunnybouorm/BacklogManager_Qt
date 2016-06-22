@@ -13,12 +13,18 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QListView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTableView>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
@@ -28,9 +34,17 @@ class Ui_MainWindowClass
 {
 public:
     QWidget *centralWidget;
+    QTableView *ActivityView;
     QGroupBox *groupBox;
+    QTableView *tableView;
+    QWidget *horizontalLayoutWidget;
+    QHBoxLayout *horizontalLayout;
+    QFormLayout *formLayout;
+    QLabel *label;
+    QLineEdit *lineEdit;
+    QPushButton *pushButton;
     QGroupBox *groupBox_2;
-    QListView *ActivityList;
+    QTextBrowser *textBrowser;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -43,19 +57,57 @@ public:
         MainWindowClass->setAnimated(true);
         centralWidget = new QWidget(MainWindowClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        ActivityView = new QTableView(centralWidget);
+        ActivityView->setObjectName(QStringLiteral("ActivityView"));
+        ActivityView->setGeometry(QRect(30, 50, 231, 361));
+        ActivityView->setShowGrid(false);
+        ActivityView->setSortingEnabled(true);
+        ActivityView->horizontalHeader()->setHighlightSections(true);
+        ActivityView->verticalHeader()->setVisible(false);
+        ActivityView->verticalHeader()->setHighlightSections(false);
+        ActivityView->verticalHeader()->setProperty("showSortIndicator", QVariant(true));
+        ActivityView->verticalHeader()->setStretchLastSection(false);
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
-        groupBox->setGeometry(QRect(30, 50, 421, 551));
-        groupBox_2 = new QGroupBox(groupBox);
+        groupBox->setGeometry(QRect(300, 30, 771, 421));
+        tableView = new QTableView(groupBox);
+        tableView->setObjectName(QStringLiteral("tableView"));
+        tableView->setGeometry(QRect(10, 20, 691, 361));
+        horizontalLayoutWidget = new QWidget(groupBox);
+        horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
+        horizontalLayoutWidget->setGeometry(QRect(10, 390, 281, 21));
+        horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        formLayout = new QFormLayout();
+        formLayout->setSpacing(6);
+        formLayout->setObjectName(QStringLiteral("formLayout"));
+        label = new QLabel(horizontalLayoutWidget);
+        label->setObjectName(QStringLiteral("label"));
+
+        formLayout->setWidget(0, QFormLayout::LabelRole, label);
+
+        lineEdit = new QLineEdit(horizontalLayoutWidget);
+        lineEdit->setObjectName(QStringLiteral("lineEdit"));
+
+        formLayout->setWidget(0, QFormLayout::FieldRole, lineEdit);
+
+
+        horizontalLayout->addLayout(formLayout);
+
+        pushButton = new QPushButton(horizontalLayoutWidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+
+        horizontalLayout->addWidget(pushButton);
+
+        groupBox_2 = new QGroupBox(centralWidget);
         groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        groupBox_2->setGeometry(QRect(10, 50, 261, 361));
-        ActivityList = new QListView(groupBox_2);
-        ActivityList->setObjectName(QStringLiteral("ActivityList"));
-        ActivityList->setGeometry(QRect(10, 20, 211, 321));
-        ActivityList->setMouseTracking(false);
-        ActivityList->setSelectionMode(QAbstractItemView::SingleSelection);
-        ActivityList->setTextElideMode(Qt::ElideRight);
-        ActivityList->setModelColumn(0);
+        groupBox_2->setGeometry(QRect(30, 490, 341, 241));
+        textBrowser = new QTextBrowser(groupBox_2);
+        textBrowser->setObjectName(QStringLiteral("textBrowser"));
+        textBrowser->setGeometry(QRect(10, 40, 311, 181));
         MainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindowClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -76,8 +128,10 @@ public:
     void retranslateUi(QMainWindow *MainWindowClass)
     {
         MainWindowClass->setWindowTitle(QApplication::translate("MainWindowClass", "MainWindow", 0));
-        groupBox->setTitle(QString());
-        groupBox_2->setTitle(QApplication::translate("MainWindowClass", "Activity List", 0));
+        groupBox->setTitle(QApplication::translate("MainWindowClass", "Listing groupbox", 0));
+        label->setText(QApplication::translate("MainWindowClass", "Search", 0));
+        pushButton->setText(QApplication::translate("MainWindowClass", "Advanced Search", 0));
+        groupBox_2->setTitle(QApplication::translate("MainWindowClass", "Console", 0));
     } // retranslateUi
 
 };

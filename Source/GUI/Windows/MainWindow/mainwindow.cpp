@@ -1,7 +1,15 @@
 #include "Source/GUI/Windows/MainWindow/mainwindow.h"
 #include "Source/GUI/Models/activity_model.h"
+#include "../../ProxyModelFilters/activity_view_proxy_model_filter.h"
 
 #include "ui_mainwindow.h"
+
+void setupAcitvityView(QTableView *view, ActivityModel *activity_model) {
+	ActivityViewSortFilterProxyModel *proxy_model = 
+		new ActivityViewSortFilterProxyModel(view, activity_model);
+	view->setModel(proxy_model);
+	view->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+}
 
 MainWindow::MainWindow(ActivityModel *activity_model, QWidget *parent):
 	QMainWindow(parent), 
@@ -9,8 +17,8 @@ MainWindow::MainWindow(ActivityModel *activity_model, QWidget *parent):
 {
 	ui->setupUi(this);
 
-	auto view = ui->ActivityList;
-	view->setModel(activity_model);
+	auto view = ui->ActivityView;
+	setupAcitvityView(view, activity_model);
 }
 
 MainWindow::~MainWindow()

@@ -127,6 +127,18 @@
     <ClCompile Include="GeneratedFiles\App Unit Test\moc_activity_model.cpp">
       <Filter>Generated Files\App Unit Test</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_activity_view_proxy_model_filter.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_activity_view_proxy_model_filter.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\App Unit Test\moc_activity_view_proxy_model_filter.cpp">
+      <Filter>Generated Files\App Unit Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GUI\ProxyModelFilters\activity_view_proxy_model_filter.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="Source\GUI\Windows\MainWindow\mainwindow.qrc">
@@ -140,6 +152,12 @@
     </CustomBuild>
     <CustomBuild Include="Source\GUI\Models\activity_model.h">
       <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Source\GUI\ProxyModelFilters\activity_view_proxy_model_filter.h">
+      <Filter>Header Files\GUI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Source\GUI\Windows\ActivitySetupDialog\activity_setup_dialog.ui">
+      <Filter>Form Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="Source\main.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_activity_setup_dialog.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

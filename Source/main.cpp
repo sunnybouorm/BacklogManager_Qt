@@ -18,8 +18,8 @@ int main(int argc, char *argv[])
 	MainWindow w(activity_model);
 	w.show();
 
-	core.database_.CloseConnection();
 	return a.exec();
+	core.database_.CloseConnection();
 
 	delete activity_model;
 }

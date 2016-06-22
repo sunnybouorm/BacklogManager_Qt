@@ -5,46 +5,9 @@
 
 #include <iostream>//TODO delete me
 
-ActivityModel::ActivityModel(Core* core_, QObject *parent) : QAbstractListModel(parent){
+ActivityModel::ActivityModel(Core* core_, QObject *parent) : QAbstractTableModel(parent){
 	this->core_ = core_;
 
-	//TODO delete me
-	//---------------------------------------------
-	QueryContainer query;
-	std::string  column_name, column_data;
-	RowContainer row;
-
-	std::string table_name = "Activity";
-	std::string activity_name = "Movies";
-
-	column_name = "Name";
-	column_data = activity_name;
-
-	row[column_name] = column_data;
-
-	query.table_name	= table_name;
-	query.columns		= row;
-	query.request		= INSERT;
-
-	core_->SqlRequest(query);
-	row.clear();
-
-	table_name = "Activity";
-	activity_name = "Video Games";
-
-	column_name = "Name";
-	column_data = activity_name;
-
-	row[column_name] = column_data;
-
-	query.table_name = table_name;
-	query.columns = row;
-	query.request = INSERT;
-
-	core_->SqlRequest(query);
-	row.clear();
-
-	//---------------------------------------------
 	this->string_list_ << "<Add new Activity>";
 
 	std::string sql = "SELECT Name FROM Activity;";
@@ -63,12 +26,15 @@ int ActivityModel::rowCount(const QModelIndex &parent) const {
 	return string_list_.count();
 }
 
+int ActivityModel::columnCount(const QModelIndex &parent) const {
+	return 1;
+}
+
 /*
  * Configures display properties of the List view attached to this model
  */
 QVariant ActivityModel::data(const QModelIndex &index, int role) const {
 	switch (role) {
-
 	case Qt::DisplayRole:
 		if (!index.isValid()) {
 			return QVariant();
@@ -82,11 +48,11 @@ QVariant ActivityModel::data(const QModelIndex &index, int role) const {
 		break;
 
 	case Qt::TextAlignmentRole:
-		if (index.row() == 0) { return Qt::AlignCenter; }
+		if (index.row() == 0 && index.column() == 0) { return Qt::AlignCenter; }
 		break;
 
 	case Qt::FontRole:
-		if (index.row() == 0) {
+		if (index.row() == 0 && index.column() == 0) {
 			QFont font;
 			font.setItalic(true);
 			return font;
@@ -104,12 +70,70 @@ QVariant ActivityModel::data(const QModelIndex &index, int role) const {
 	return QVariant();
 }
 
+QVariant ActivityModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+	if (role == Qt::DisplayRole)
+	{
+		if (orientation == Qt::Horizontal) {
+			switch (section)
+			{
+			case 0:
+				return QString("Activities");
+			}
+		}
+		return QVariant();
+	}
+	else { return QVariant(); }
+
+}
+
+Qt::ItemFlags ActivityModel::flags(const QModelIndex &index) const 
+{
+	if (index.isValid() == false) {
+		return Qt::ItemIsEnabled;
+	}
+
+	return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+}
+
 bool ActivityModel::setData(const QModelIndex &index, const QVariant &value,
 	int role) 
 {
-	bool result;
+	if (index.isValid() && role == Qt::EditRole) {
 
+		if (index.row() == 0) {
+			this->string_list_.append(value.toString());
+			QModelIndex new_index = this->createIndex(string_list_.size(),index.column());
+			emit dataChanged(new_index, new_index);
+			return true;
+		}
+		else {
+			bool request_successful = false;
 
+			QueryContainer query;
+			RowContainer row;
 
-	return result;
+			query.table_name = "Activity";
+
+			row["Name"] = string_list_.at(index.row()).toStdString();
+			query.search_params = row;
+			row.clear();
+
+			row["Name"] = value.toString().toStdString();
+			query.columns = row;
+			row.clear();
+
+			query.request = UPDATE;
+			request_successful = core_->SqlRequest(query);
+
+			if (request_successful == true) {
+				this->string_list_.replace(index.row(), value.toString());
+				emit dataChanged(index, index);
+				return true;
+			}
+			return false;
+		}
+
+	}
+	return false;
 }
