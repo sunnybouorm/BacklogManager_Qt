@@ -30,10 +30,13 @@
      <bool>false</bool>
     </property>
     <property name="sortingEnabled">
-     <bool>true</bool>
+     <bool>false</bool>
     </property>
     <attribute name="horizontalHeaderHighlightSections">
-     <bool>true</bool>
+     <bool>false</bool>
+    </attribute>
+    <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+     <bool>false</bool>
     </attribute>
     <attribute name="verticalHeaderVisible">
      <bool>false</bool>
@@ -42,7 +45,7 @@
      <bool>false</bool>
     </attribute>
     <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-     <bool>true</bool>
+     <bool>false</bool>
     </attribute>
     <attribute name="verticalHeaderStretchLastSection">
      <bool>false</bool>
@@ -76,7 +79,7 @@
        <x>10</x>
        <y>390</y>
        <width>281</width>
-       <height>21</height>
+       <height>25</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">

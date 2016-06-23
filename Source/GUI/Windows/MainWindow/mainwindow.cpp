@@ -7,8 +7,11 @@
 void setupAcitvityView(QTableView *view, ActivityModel *activity_model) {
 	ActivityViewSortFilterProxyModel *proxy_model = 
 		new ActivityViewSortFilterProxyModel(view, activity_model);
+	view->horizontalHeader()->setSectionsClickable(false);
 	view->setModel(proxy_model);
 	view->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+
+	proxy_model->sort(0, Qt::AscendingOrder);
 }
 
 MainWindow::MainWindow(ActivityModel *activity_model, QWidget *parent):

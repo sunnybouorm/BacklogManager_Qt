@@ -61,11 +61,12 @@ public:
         ActivityView->setObjectName(QStringLiteral("ActivityView"));
         ActivityView->setGeometry(QRect(30, 50, 231, 361));
         ActivityView->setShowGrid(false);
-        ActivityView->setSortingEnabled(true);
-        ActivityView->horizontalHeader()->setHighlightSections(true);
+        ActivityView->setSortingEnabled(false);
+        ActivityView->horizontalHeader()->setHighlightSections(false);
+        ActivityView->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
         ActivityView->verticalHeader()->setVisible(false);
         ActivityView->verticalHeader()->setHighlightSections(false);
-        ActivityView->verticalHeader()->setProperty("showSortIndicator", QVariant(true));
+        ActivityView->verticalHeader()->setProperty("showSortIndicator", QVariant(false));
         ActivityView->verticalHeader()->setStretchLastSection(false);
         groupBox = new QGroupBox(centralWidget);
         groupBox->setObjectName(QStringLiteral("groupBox"));
@@ -75,7 +76,7 @@ public:
         tableView->setGeometry(QRect(10, 20, 691, 361));
         horizontalLayoutWidget = new QWidget(groupBox);
         horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(10, 390, 281, 21));
+        horizontalLayoutWidget->setGeometry(QRect(10, 390, 281, 25));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);

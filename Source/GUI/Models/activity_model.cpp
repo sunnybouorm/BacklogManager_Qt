@@ -7,6 +7,7 @@
 
 ActivityModel::ActivityModel(Core* core_, QObject *parent) : QAbstractTableModel(parent){
 	this->core_ = core_;
+	this->tag_row_ = 0;
 
 	this->string_list_ << "<Add new Activity>";
 
@@ -48,11 +49,11 @@ QVariant ActivityModel::data(const QModelIndex &index, int role) const {
 		break;
 
 	case Qt::TextAlignmentRole:
-		if (index.row() == 0 && index.column() == 0) { return Qt::AlignCenter; }
+		if (index.row() == tag_row_ && index.column() == 0) { return Qt::AlignCenter; }
 		break;
 
 	case Qt::FontRole:
-		if (index.row() == 0 && index.column() == 0) {
+		if (index.row() == tag_row_ && index.column() == 0) {
 			QFont font;
 			font.setItalic(true);
 			return font;
@@ -99,6 +100,18 @@ bool ActivityModel::insertRows(int position, int count, const QModelIndex &paren
 	return true;
 }
 
+bool ActivityModel::removeRows(int position, int count, const QModelIndex &index)
+{
+	beginRemoveRows(QModelIndex(), position, position + count - 1);
+
+	for (int row = 0; row < count; ++row) {
+		this->string_list_.removeAt(position);
+	}
+
+	endRemoveRows();
+	return true;
+}
+
 Qt::ItemFlags ActivityModel::flags(const QModelIndex &index) const 
 {
 	if (index.isValid() == false) {
@@ -110,19 +123,22 @@ Qt::ItemFlags ActivityModel::flags(const QModelIndex &index) const
 
 bool ActivityModel::setData(const QModelIndex &index, const QVariant &value, int role) 
 {
-	return setData(index, value, role, UPDATE);
+	return setDataSql(index, value, role, UPDATE); 
 }
 
-bool ActivityModel::setData(const QModelIndex &index, const QVariant &value, int role,
+bool ActivityModel::setDataSql(const QModelIndex &index, const QVariant &value, int role,
 	Request sql_request) 
 {
-	if (index.isValid() && role == Qt::EditRole) {
-		if (index.row() == 0) {
+	if ( index.isValid() && (role == Qt::EditRole) ) {
+		if ( (index.row() == tag_row_) && (sql_request == UPDATE) ) {
+
 			int last_row = string_list_.size();
 			this->insertRows(last_row, 1);
-			QModelIndex last_index = QAbstractItemModel::createIndex(last_row, index.column());
 
-			return ( this->setData(last_index, value, role, INSERT) );
+			QModelIndex last_index = QAbstractItemModel::createIndex(last_row, 
+				index.column());
+
+			return (this->setDataSql(last_index, value, role, INSERT));
 		}
 		else {
 			bool request_successful = false;
