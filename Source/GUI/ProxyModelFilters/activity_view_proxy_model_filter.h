@@ -7,11 +7,13 @@ class ActivityViewSortFilterProxyModel : public QSortFilterProxyModel
 {
 	Q_OBJECT
 
+private:
+	int ActivityViewSortFilterProxyModel::removeAddActivityItem(QModelIndex &index);
+
 public:
 	ActivityModel *activity_model_;
 	ActivityViewSortFilterProxyModel(QTableView *view, ActivityModel *activity_model, QObject *parent= Q_NULLPTR);
 
 	void sort(int column, Qt::SortOrder order);
-
 	bool setData(const QModelIndex &index, const QVariant &value, int role);
 };

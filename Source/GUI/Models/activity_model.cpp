@@ -109,6 +109,7 @@ bool ActivityModel::removeRows(int position, int count, const QModelIndex &index
 	}
 
 	endRemoveRows();
+
 	return true;
 }
 
@@ -129,44 +130,28 @@ bool ActivityModel::setData(const QModelIndex &index, const QVariant &value, int
 bool ActivityModel::setDataSql(const QModelIndex &index, const QVariant &value, int role,
 	Request sql_request) 
 {
-	if ( index.isValid() && (role == Qt::EditRole) ) {
-		if ( (index.row() == tag_row_) && (sql_request == UPDATE) ) {
+	bool request_successful = false;
 
-			int last_row = string_list_.size();
-			this->insertRows(last_row, 1);
+	QueryContainer query;
+	RowContainer row;
 
-			QModelIndex last_index = QAbstractItemModel::createIndex(last_row, 
-				index.column());
+	query.table_name = "Activity";
+	query.request = sql_request;
 
-			return (this->setDataSql(last_index, value, role, INSERT));
-		}
-		else {
-			bool request_successful = false;
+	row["Name"] = string_list_.at(index.row()).toStdString();
+	query.search_params = row;
+	row.clear();
 
-			QueryContainer query;
-			RowContainer row;
+	row["Name"] = value.toString().toStdString();
+	query.columns = row;
+	row.clear();
 
-			query.table_name = "Activity";
-			query.request = sql_request;
+	request_successful = core_->SqlRequest(query);
 
-			row["Name"] = string_list_.at(index.row()).toStdString();
-			query.search_params = row;
-			row.clear();
-
-			row["Name"] = value.toString().toStdString();
-			query.columns = row;
-			row.clear();
-
-			request_successful = core_->SqlRequest(query);
-
-			if (request_successful == true) {
-				this->string_list_.replace(index.row(), value.toString());
-				emit dataChanged(index, index);
-				return true;
-			}
-			return false;
-		}
-
+	if (request_successful == true) {
+		this->string_list_.replace(index.row(), value.toString());
+		emit dataChanged(index, index);
+		return true;
 	}
 	return false;
 }
