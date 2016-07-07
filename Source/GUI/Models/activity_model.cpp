@@ -130,6 +130,7 @@ bool ActivityModel::setData(const QModelIndex &index, const QVariant &value, int
 bool ActivityModel::setDataSql(const QModelIndex &index, const QVariant &value, int role,
 	Request sql_request) 
 {
+
 	bool request_successful = false;
 
 	QueryContainer query;

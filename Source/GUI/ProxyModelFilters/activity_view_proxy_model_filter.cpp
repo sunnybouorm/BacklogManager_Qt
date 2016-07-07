@@ -34,23 +34,21 @@ bool ActivityViewSortFilterProxyModel::setData(const QModelIndex &index, const Q
 			bool is_successful = false;
 			QModelIndex tag_index = QAbstractItemModel::createIndex(0, 0);
 			int index_row = removeAddActivityItem(tag_index);
-			activity_model_->insertRows(index_row, 1);
 
+			is_successful  = activity_model_->insertRows(index_row, 1);
 			is_successful &= this->activity_model_->setDataSql(index, value, Qt::EditRole, INSERT);
-
-			//QModelIndex tag_index = QAbstractItemModel::createIndex(index_row, 0);
+			if (is_successful == false)	{ activity_model_->removeRows(0, 1, index); }
 			is_successful &= setData(tag_index, "<Add new Activity>", Qt::EditRole);
 
 			return is_successful;
-		} /*else
+		} else
 		{
+
 			bool is_successful = false;
-			is_successful = activity_model_->removeRows(activity_model_->tag_row_, 1);
-			is_successful &= this->activity_model_->setDataSql(index, value, Qt::EditRole, UPDATE);
-			is_successful &= setData(index, "<Add new Activity>", Qt::EditRole);
+			is_successful = this->activity_model_->setDataSql(index, value, Qt::EditRole, UPDATE);
 
 			return is_successful;
-		}*/
+		}
 	}
 
 	return false;
